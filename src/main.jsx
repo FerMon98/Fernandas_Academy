@@ -9,8 +9,10 @@ import Home from './Home.jsx'
 import Cursos from './Cursos.jsx'
 import CursosDetalles from './CursosDetalles.jsx'
 import Admin from './cases/Admin.jsx'
-import Login from "./cases/Login.jsx";
+import { AuthProvider } from './Auth/AuthContext';
+import Login from "./Auth/Login.jsx";
 import NotFound from "./cases/NotFound.jsx"
+import RequireAuth from "./Auth/RequireAuth"
 
 function ExternalRedirect({ url }) {
     useEffect(() => {
@@ -23,19 +25,25 @@ function ExternalRedirect({ url }) {
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-
-          <Route index element={<Home />} />
-          <Route path="/Cursos" element={<Cursos />} />
-          <Route path="/Cursos/:id" element={<CursosDetalles />} />
-          <Route path="/Admin?auth" element={<Admin />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Cheatsheet" element={<ExternalRedirect url="https://websitesetup.org/wp-content/uploads/2014/09/html5-cheat-sheet.png" />} />
-          <Route element={<NotFound />} />
-          
-        </Route>
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<Home />} />
+            <Route path="/Cursos" element={<Cursos />} />
+            <Route path="/Cursos/:id" element={<CursosDetalles />} />
+            <Route path="/Admin" element={
+              <RequireAuth>
+                <Admin />
+              </RequireAuth>
+            } />
+            <Route path="/Login" element={<Login />} />
+            <Route path="/Cheatsheet" element={
+              <ExternalRedirect url="https://websitesetup.org/wp-content/uploads/2014/09/html5-cheat-sheet.png" />
+            } />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
-  </StrictMode>,
-)
+  </StrictMode>
+);

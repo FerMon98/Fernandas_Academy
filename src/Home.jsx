@@ -15,7 +15,7 @@ function Home() {
 
                         <h2>Desde nuestra sección de <Button><Link to="/Cursos" className='nav-link'>Cursos</Link></Button></h2><br />
 
-                        <h2>Nuestra sección de herramientas <Button><Link to="/Cheatsheet" className='nav-link'>Cheatsheets</Link></Button>
+                        <h2>Nuestra sección de herramientas <Button><Link to="/Cheatsheet" className='nav-link' target="_blank">Cheatsheets</Link></Button>
                         </h2>
                     </div>
             </Container>
