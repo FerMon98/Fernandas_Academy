@@ -23,7 +23,7 @@ function App() {
       </Navbar>
       <br />
 
-      <Container style={{backgroundColor: "lightyellow"}}>
+      <Container style={{backgroundColor: "lightyellow", borderRadius: "15px", padding: "1rem"}}>
         <Outlet />
       </Container>
 

@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Dropdown, Form, Card, Button, Row, Col } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
+import { getImagePath } from './cases/getImagePath.js'
 import CJson from "./Cursos.json";
 
 function Cursos() {
@@ -7,9 +9,12 @@ function Cursos() {
     const [texto, setTexto] = useState("");
     const [category, setCategory] = useState("");
     const [level, setLevel] = useState("");
+    const navigate = useNavigate();
 
-    function addItem(curso) {
-        console.log(`Agregado: ${curso.titulo}`);
+    function addItem(curso, imgCurso) {
+        navigate(`/Cursos/${curso.id}`, {
+            state: { curso, imgCurso }
+        });
     }
 
     useEffect(() => {
@@ -26,7 +31,7 @@ function Cursos() {
         {/* 🔍 Search and Filters */}
         <Row className="align-items-center mb-2 pt-2">
             <Col md={6}>
-                <Form className="d-flex" onSubmit={(e) => {e.preventDefault()}}>
+                <Form className="d-flex pb-2" onSubmit={(e) => {e.preventDefault()}}>
                     <Form.Control type="search" placeholder="Buscar curso" className="me-2" aria-label="Buscar" value={texto}
                     onChange={(e) => setTexto(e.target.value)}/>
                     <Button variant="primary" type="submit"> Buscar </Button>
@@ -34,7 +39,7 @@ function Cursos() {
             </Col>
 
             <Col md="auto">
-                <Dropdown>
+                <Dropdown className="pb-2">
                     <Dropdown.Toggle variant="success" id="dropdown-categoria">Categoría</Dropdown.Toggle>
                     <Dropdown.Menu>
                         <Dropdown.Item onClick={() => setCategory("frontend")}>Frontend</Dropdown.Item>
@@ -47,7 +52,7 @@ function Cursos() {
             </Col>
 
             <Col>
-                <Dropdown >
+                <Dropdown className="pb-2">
                     <Dropdown.Toggle variant="success" id="dropdown-nivel">Nivel</Dropdown.Toggle>
                     <Dropdown.Menu>
                         <Dropdown.Item onClick={() => setLevel("basico")}>Básico</Dropdown.Item>
@@ -65,28 +70,13 @@ function Cursos() {
         ) : (
             <Row className="g-3">
             {filteredCursos.map((curso) => {
-                let imgCurso;
-                switch (curso.categoria) {
-                case "devops":
-                    imgCurso = "./devops.jpeg";
-                    break;
-                case "herramientas":
-                    imgCurso = "./tools.jpeg";
-                    break;
-                case "frontend":
-                    imgCurso = "./frontend.jpeg";
-                    break;
-                case "backend":
-                    imgCurso = "./backend.jpeg";
-                    break;
-                default:
-                    imgCurso = "./default.jpeg";
-                }
+                
+            let imgCurso = getImagePath(curso.categoria);
 
                 return (
-                <Col md={4} sm={6} xs={12} key={curso.id}>
+                <Col md={3} sm={6} xs={12} key={curso.id}>
                     <Card style={{ backgroundColor: "lightgrey", height: "100%" }}>
-                    <Card.Img  style={{ height: "6rem", objectFit: "cover" }} src={imgCurso} alt={curso.categoria}/>
+                    <Card.Img  style={{ height: "6rem", objectFit: "centered" }} src={imgCurso} alt={curso.categoria}/>
                     <Card.Body>
                         <Card.Title>{curso.titulo}</Card.Title>
                         <Card.Text>
@@ -94,7 +84,7 @@ function Cursos() {
                         <br />
                         <strong>Nivel:</strong> {curso.nivel[0].toUpperCase() + curso.nivel.slice(1)}
                         </Card.Text>
-                        <Button variant="primary" onClick={() => addItem(curso)}>
+                        <Button variant="primary" onClick={() => addItem(curso, imgCurso)}>
                         Ver más
                         </Button>
                     </Card.Body>
