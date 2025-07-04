@@ -4,35 +4,13 @@ import { useNavigate } from 'react-router-dom';
 
 function Login() {
 
-    const [username, setUserName] = useState();
-    const [password, setPassword] = useState();
+    const [username, setUserName] = useState("Fernanda");
+    const [password, setPassword] = useState(1234);
 
-    setUserName("Fernanda")
-    setPassword(1234)
 
-    const handleLogin = async (e) => {
+    const handleLogin = () => {
         e.preventDefault();
-
-        const response = await fetch("/api/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password }),
-        });
-
-        if (response.ok) {
-            const { token } = await response.json();
-
-            // Store token securely
-            localStorage.setItem("authToken", token);
-
-            // Optionally store user info or update global auth context
-            login(token); // from your AuthContext
-
-            //Redirect after login
-            navigate("/Admin");
-        } else {
-            console.error("Credenciales inválidas");
-        }
+        
     };
 
 

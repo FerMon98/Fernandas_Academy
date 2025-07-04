@@ -57,7 +57,7 @@ function CursosDetalles() {
                         <strong>Detalles:</strong> {curso.descripcion}
                     </Card.Text>
                 </Card.Body>
-            </Card>
+            </Card> <br />
             <Button
                 onClick={handleGoBack}
                 style={{ padding: "10px", cursor: "pointer" }}

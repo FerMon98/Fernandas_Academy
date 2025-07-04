@@ -25,17 +25,12 @@ function ExternalRedirect({ url }) {
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <AuthProvider>
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Home />} />
             <Route path="/Cursos" element={<Cursos />} />
             <Route path="/Cursos/:id" element={<CursosDetalles />} />
-            <Route path="/Admin" element={
-              <RequireAuth>
-                <Admin />
-              </RequireAuth>
-            } />
+            <Route path="/Admin/?auth" element={<Admin/>} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Cheatsheet" element={
               <ExternalRedirect url="https://websitesetup.org/wp-content/uploads/2014/09/html5-cheat-sheet.png" />
@@ -43,7 +38,6 @@ createRoot(document.getElementById('root')).render(
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
-      </AuthProvider>
     </BrowserRouter>
   </StrictMode>
 );
