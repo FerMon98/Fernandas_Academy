@@ -76,7 +76,7 @@ function Cursos() {
                 return (
                 <Col md={3} sm={6} xs={12} key={curso.id}>
                     <Card style={{ backgroundColor: "lightgrey", height: "100%" }}>
-                    <Card.Img  style={{ height: "6rem", objectFit: "centered" }} src={imgCurso} alt={curso.categoria}/>
+                    <Card.Img  style={{ height: "6rem", objectFit: "cover" }} src={imgCurso} alt={curso.categoria}/>
                     <Card.Body>
                         <Card.Title>{curso.titulo}</Card.Title>
                         <Card.Text>

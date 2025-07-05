@@ -5,8 +5,8 @@ function NotFound () {
 
     return (
         <>
-            <Container>
-                <img src="https://http.dog/404.jpg" alt="Not found"/>
+            <Container style={{width:"100%", display:"flex", justifyContent:"center"}}>
+                <img src="https://http.dog/404.jpg" alt="Not found" style={{height:"35rem", padding:"1rem", width:"60%", borderRadius: "25px"}}/>
             </Container>
         </>
     )
