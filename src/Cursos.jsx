@@ -11,7 +11,7 @@ function Cursos() {
     const [level, setLevel] = useState("");
     const navigate = useNavigate();
 
-    function addItem(curso, imgCurso) {
+    function goItem(curso, imgCurso) {
         navigate(`/Cursos/${curso.id}`, {
             state: { curso, imgCurso }
         });
@@ -84,7 +84,7 @@ function Cursos() {
                         <br />
                         <strong>Nivel:</strong> {curso.nivel[0].toUpperCase() + curso.nivel.slice(1)}
                         </Card.Text>
-                        <Button variant="primary" onClick={() => addItem(curso, imgCurso)}>
+                        <Button variant="primary" onClick={() => goItem(curso, imgCurso)}>
                         Ver más
                         </Button>
                     </Card.Body>
