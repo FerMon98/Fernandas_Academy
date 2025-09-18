@@ -4,8 +4,6 @@ A lightweight **frontend learning platform** built with **React + Vite**. Browse
 
 ## Demo
 
-> If the video is in the repo root and named `cursos0507.mp4`, the embed below will play on GitHub.
-
 <video src="./cursos0507.mp4" controls title="Fernanda’s Academy Demo"></video>
 
 [▶️ Watch the demo](./cursos0507.mp4)
